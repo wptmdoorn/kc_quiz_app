@@ -50,3 +50,6 @@ rsconnect/
 
 # Secrets google drive folder
 .secrets/
+.Rproj.user
+.Rdata
+.DS_Store

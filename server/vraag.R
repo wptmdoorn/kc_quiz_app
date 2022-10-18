@@ -78,18 +78,15 @@ renderTFVraag <- function(huidige_quiz) {
 
 render_vraag <- function(huidige_quiz) {
   .c <- huidige_quiz$huidigeVraag$Type
-  print(.c)
   
   if (.c == 'OPEN') {
-    print('open vraag')
     renderOpenVraag(huidige_quiz)
   } else if (.c == 'MC') {
-    print('mc vraag')
     renderMCVraag(huidige_quiz)
   } else if (.c == 'TRUEFALSE') {
-    print('t-f vraag')
     renderTFVraag(huidige_quiz)
   } else {
-    print('geen type')
+    print('Geen type')
+    print(huidige_quiz$huidigeVraag)
   }
 }
