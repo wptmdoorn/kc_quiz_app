@@ -11,6 +11,9 @@ ui <-
     inverse = TRUE,
     #theme = shinytheme("spacelab"),
     theme = bs_theme(version = 5, bootswatch = "minty"),
+    
+    tags$link(rel = "stylesheet", type = "text/css", href = "style.css"), 
+    
     tabPanel("Nieuw",
              fluidPage(
                initStore("store", "shinyStore-ex1"),

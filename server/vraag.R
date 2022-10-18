@@ -77,7 +77,7 @@ renderTFVraag <- function(huidige_quiz) {
 }
 
 render_vraag <- function(huidige_quiz) {
-  .c <- huidige_quiz$huidigeVraag$Type
+  .c <- toupper(huidige_quiz$huidigeVraag$Type)
   
   if (.c == 'OPEN') {
     renderOpenVraag(huidige_quiz)

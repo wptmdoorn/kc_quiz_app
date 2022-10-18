@@ -66,8 +66,6 @@ server <- function(input, output, session) {
   })
   
   observeEvent(input$submit, {
-    print('Geklikt op nieuwe quiz')
-    
     if (is.null(input$categorien)) {
       .cat <- unique(vragen_data$Cat)
     } else {
@@ -142,15 +140,19 @@ server <- function(input, output, session) {
         HTML(sprintf(
           '<h6> Correcte antwoord: </h6> %s',
           .hv[, .hv$Correct]
-        ))),
+        )),
+        if(!is.na(.hv$Toelichting))
+          HTML(sprintf(
+            '<br> <br> <details><summary>
+              <h7> <center> Toelichting </center> </h7></summary>
+              <p>%s</p></details>', .hv$Toelichting))
+        ),
         type = .t,
-        timer = 5000,
+        timer = 20000,
         showConfirmButton = TRUE,
         callbackR = function(x) {
           .hq$vraagNr <- .hq$vraagNr + 1
           .hq$huidigeVraag <- .hq$vragen[.hq$vragenIdx[.hq$vraagNr],]
-          
-          print(.hq$antwoorden)
           
           huidigeQuiz(.hq)
         }
@@ -167,18 +169,21 @@ server <- function(input, output, session) {
           HTML(
             sprintf('<h6>Correcte antwoord:</h6> %s',
                     .hv[, .hv$Correct])
-          )),
+          ),
+          if(!is.na(.hv$Toelichting))
+            HTML(sprintf(
+              '<br> <br> <details><summary>
+              <h7> <center> Toelichting </center> </h7></summary>
+              <p>%s</p></details>', .hv$Toelichting))
+          ),
+        timer = 20000,
         showConfirmButton = TRUE, confirmButtonText = 'Goed',
         showCancelButton = TRUE, cancelButtonText = 'Fout',
         callbackR = function(x) {
-          print('callbackR in open vraag!')
-          print(x)
           .hq$antwoorden <- append(.hq$antwoorden, x)
           
           .hq$vraagNr <- .hq$vraagNr + 1
           .hq$huidigeVraag <- .hq$vragen[.hq$vragenIdx[.hq$vraagNr],]
-          
-          print(.hq$antwoorden)
           
           huidigeQuiz(.hq)
         }
@@ -196,7 +201,6 @@ server <- function(input, output, session) {
     if (is.null(historyData())) {
       HTML('Geen historische resultaten.')
     } else {
-      print(historyData())
       column(6, align="center", offset=3, 
              div(
                id = 'table',
