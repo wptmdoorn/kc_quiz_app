@@ -22,6 +22,7 @@ ui <-
     
     tags$footer(HTML('<br/> <br/>
                 <p style="color:#D0D0D0"> © William van Doorn - 
+                <a href="https://github.com/wptmdoorn/kc_quiz_app"> Source</a> - 
                 <a href="mailto:wptmdoorn@gmail.com">Contact</a> </p>'), 
                 align = "center")
   )
